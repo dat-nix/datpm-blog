@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
+
+const recentCTFs = [
+  { name: 'TBCTF 2025', date: 'Jun' },
+  { name: 'BYUCTF 2026', date: 'May' },
+  { name: 'picoCTF', date: 'ongoing' },
+];
+
+const projects = [
+  { name: 'RMIT CTF Program', status: 'active' },
+  { name: 'NCT Workshop', status: 'done' },
+  { name: 'this blog', status: 'wip' },
+];
+---
+<Base>
+  <Nav />
+  <style>
+    .hero { border-bottom: 3px solid #000; padding: 18px 0; }
+    .hero-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid #000; display: inline-block; padding: 1px 7px; margin-bottom: 12px; }
+    .hero-title { font-size: clamp(28px, 5vw, 42px); font-weight: 700; line-height: 1.05; margin-bottom: 10px; }
+    .hero-sub { font-size: 13px; color: #444; border-left: 3px solid #000; padding-left: 10px; line-height: 1.6; }
+    .grid { display: grid; grid-template-columns: 2fr 1fr; border-bottom: 3px solid #000; }
+    @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } .side-col { border-left: none; border-top: 3px solid #000; padding: 16px 0; } }
+    .main-col { border-right: 2px solid #000; padding: 18px 18px 18px 0; }
+    .side-col { padding: 18px 0 18px 18px; }
+    .col-head { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 5px; margin-bottom: 14px; }
+    .post { border-bottom: 1px solid #000; padding-bottom: 16px; margin-bottom: 16px; }
+    .post:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .post-meta { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #666; margin-bottom: 4px; display: flex; gap: 14px; }
+    .post-title { font-size: 17px; font-weight: 700; line-height: 1.25; margin-bottom: 7px; text-decoration: none; display: block; }
+    .post-title:hover { background: #000; color: #fff; }
+    .post-excerpt { font-size: 13px; line-height: 1.65; color: #222; margin-bottom: 8px; }
+    .post-tags { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .tag { font-size: 10px; border: 1px solid #000; padding: 1px 6px; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; color: #000; }
+    .tag:hover { background: #000; color: #fff; }
+    .tag-invert { background: #000; color: #fff; }
+    .readmore { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-left: auto; text-decoration: underline; }
+    .all-posts { font-size: 12px; margin-top: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .side-section { margin-bottom: 18px; border-bottom: 1px solid #000; padding-bottom: 18px; }
+    .side-section:last-child { border-bottom: none; margin-bottom: 0; }
+    .side-head { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 10px; }
+    .side-item { font-size: 12px; border-bottom: 1px dashed #bbb; padding: 5px 0; display: flex; justify-content: space-between; align-items: baseline; }
+    .side-item:last-child { border-bottom: none; }
+    .side-item a { color: #000; text-decoration: none; flex: 1; }
+    .side-item a:hover { text-decoration: underline; background: none; color: #000; }
+    .side-item span { font-size: 10px; color: #888; white-space: nowrap; margin-left: 6px; }
+    .now-item { font-size: 12px; margin-bottom: 7px; line-height: 1.4; }
+    .now-item::before { content: "→ "; font-weight: 700; }
+    .status-badge { display: inline-block; font-size: 10px; border: 1px solid #000; padding: 1px 6px; margin-bottom: 10px; font-family: 'Courier New', monospace; }
+    .status-badge::before { content: "● "; color: #0a0; }
+  </style>
+
+  <div class="hero">
+    <div class="hero-tag">security researcher in progress</div>
+    <h1 class="hero-title">Phạm Minh Đạt<br>breaks things,<br>writes about it.</h1>
+    <p class="hero-sub">Offensive security · CTF · Bug bounty · Build log<br>Vietnam → internet</p>
+  </div>
+
+  <div class="grid">
+    <div class="main-col">
+      <div class="col-head">latest</div>
+      {posts.length === 0 ? (
+        <p style="font-size:13px;color:#666;">No posts yet. First one incoming.</p>
+      ) : posts.map(post => (
+        <article class="post">
+          <div class="post-meta">
+            <span>{post.data.date.toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'})}</span>
+            <span>{post.data.category}</span>
+          </div>
+          <a href={`/writing/${post.id}`} class="post-title">{post.data.title}</a>
+          <p class="post-excerpt">{post.data.excerpt}</p>
+          <div class="post-tags">
+            {post.data.tags.map((t: string) => <span class="tag">{t}</span>)}
+            <a href={`/writing/${post.id}`} class="readmore">read →</a>
+          </div>
+        </article>
+      ))}
+      <div class="all-posts"><a href="/writing">all posts →</a></div>
+    </div>
+
+    <div class="side-col">
+      <div class="side-section">
+        <div class="side-head">now</div>
+        <span class="status-badge">online</span>
+        <div class="now-item">Grinding binary exploitation</div>
+        <div class="now-item">Tổ chức CTF semester tại RMIT</div>
+        <div class="now-item">Đọc: how2heap</div>
+        <div class="now-item">Target: first bug bounty report</div>
+      </div>
+      <div class="side-section">
+        <div class="side-head">recent CTFs</div>
+        {recentCTFs.map(c => (
+          <div class="side-item"><span>{c.name}</span><span>{c.date}</span></div>
+        ))}
+      </div>
+      <div class="side-section">
+        <div class="side-head">projects</div>
+        {projects.map(p => (
+          <div class="side-item"><span>{p.name}</span><span>{p.status}</span></div>
+        ))}
+      </div>
+      <div class="side-section">
+        <div class="side-head">links</div>
+        <div class="side-item"><a href="https://github.com" target="_blank" rel="noopener">github</a></div>
+        <div class="side-item"><a href="https://ctftime.org" target="_blank" rel="noopener">ctftime</a></div>
+        <div class="side-item"><a href="/rss.xml">rss</a></div>
+        <div class="side-item"><a href="/about#pgp">pgp key</a></div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Base>

@@ -1,0 +1,24 @@
+---
+const year = new Date().getFullYear();
+---
+<style>
+  footer {
+    border-top: 3px solid #000;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    margin-top: 2rem;
+  }
+  footer a { font-size: 11px; margin-left: 14px; }
+</style>
+
+<footer>
+  <span>© {year} Phạm Minh Đạt · no cookies · no tracking · no bullshit</span>
+  <span>
+    <a href="/rss.xml">rss</a>
+    <a href="/about#pgp">pgp</a>
+    <a href="https://github.com/datpm" target="_blank" rel="noopener">github</a>
+  </span>
+</footer>

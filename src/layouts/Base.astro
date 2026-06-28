@@ -1,0 +1,56 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = 'datpm.com', description = 'Offensive security · CTF · Bug bounty · Build log' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title === 'datpm.com' ? title : `${title} · datpm.com`}</title>
+  <link rel="alternate" type="application/rss+xml" title="datpm.com" href="/rss.xml" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      font-family: 'Times New Roman', Times, serif;
+      background: #fff;
+      color: #000;
+      font-size: 16px;
+    }
+    body { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+    a { color: #000; }
+    a:hover { background: #000; color: #fff; text-decoration: none; }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.88em;
+      background: #f0f0f0;
+      padding: 1px 5px;
+    }
+    pre {
+      background: #111;
+      color: #e0e0e0;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 1.4em 0;
+      border-left: 4px solid #00ff41;
+    }
+    pre code { background: none; color: inherit; padding: 0; font-size: 0.85em; }
+    blockquote {
+      border-left: 4px solid #000;
+      padding-left: 14px;
+      color: #444;
+      margin: 1.2em 0;
+      font-style: italic;
+    }
+    hr { border: none; border-top: 2px solid #000; margin: 2em 0; }
+    img { max-width: 100%; border: 1px solid #000; }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>

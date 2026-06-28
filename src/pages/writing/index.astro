@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Base title="writing">
+  <Nav />
+  <style>
+    .page-head { border-bottom: 3px solid #000; padding: 16px 0; }
+    .page-head h1 { font-size: 28px; font-weight: 700; }
+    .page-head p { font-size: 13px; color: #444; margin-top: 4px; }
+    .post-list { padding: 0; }
+    .post-row {
+      display: grid;
+      grid-template-columns: 110px 1fr auto;
+      gap: 0 16px;
+      align-items: baseline;
+      border-bottom: 1px solid #000;
+      padding: 12px 0;
+      font-size: 14px;
+    }
+    .post-row:last-child { border-bottom: none; }
+    .post-date { font-size: 11px; color: #666; font-family: 'Courier New', monospace; white-space: nowrap; }
+    .post-title { font-weight: 700; text-decoration: none; }
+    .post-title:hover { background: #000; color: #fff; }
+    .post-cat { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+    .post-tags { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
+    .tag { font-size: 10px; border: 1px solid #000; padding: 0px 5px; text-transform: uppercase; }
+    .post-inner { display: flex; flex-direction: column; }
+  </style>
+
+  <div class="page-head">
+    <h1>writing</h1>
+    <p>{posts.length} posts · CTF writeups, security research, build logs, rants</p>
+  </div>
+
+  <div class="post-list">
+    {posts.map(post => (
+      <div class="post-row">
+        <span class="post-date">
+          {post.data.date.toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'})}
+        </span>
+        <div class="post-inner">
+          <a href={`/writing/${post.id}`} class="post-title">{post.data.title}</a>
+          <div class="post-tags">
+            {post.data.tags.map((t: string) => <span class="tag">{t}</span>)}
+          </div>
+        </div>
+        <span class="post-cat">{post.data.category.split(' · ')[0]}</span>
+      </div>
+    ))}
+  </div>
+
+  <Footer />
+</Base>

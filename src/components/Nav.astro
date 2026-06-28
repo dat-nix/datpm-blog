@@ -1,0 +1,84 @@
+---
+const currentPath = Astro.url.pathname;
+const links = [
+  { href: '/writing', label: 'writing' },
+  { href: '/ctf', label: 'ctf' },
+  { href: '/projects', label: 'projects' },
+  { href: '/about', label: 'about' },
+];
+---
+<style>
+  .nav {
+    border-bottom: 3px solid #000;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .nav-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: none !important;
+    color: #000 !important;
+  }
+  .nav-links { display: flex; }
+  .nav-links a {
+    font-size: 12px;
+    text-decoration: none;
+    border-left: 1px solid #000;
+    padding: 2px 10px;
+    letter-spacing: 0.04em;
+  }
+  .nav-links a.active {
+    background: #000;
+    color: #fff;
+  }
+  .marquee-bar {
+    background: #000;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    padding: 4px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 22s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+</style>
+
+<nav class="nav">
+  <a href="/" class="nav-name">datpm.com</a>
+  <div class="nav-links">
+    {links.map(l => (
+      <a href={l.href} class={currentPath.startsWith(l.href) ? 'active' : ''}>
+        {l.label}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<div class="marquee-bar">
+  <span class="marquee-inner">
+    ★ currently: grinding binary exploitation &nbsp;&nbsp;&nbsp;
+    ★ target: first bug bounty report &nbsp;&nbsp;&nbsp;
+    ★ building in public &nbsp;&nbsp;&nbsp;
+    ★ RMIT Vietnam · IT Year 2 &nbsp;&nbsp;&nbsp;
+    ★ inspired by geohot &amp; orange tsai &nbsp;&nbsp;&nbsp;
+    ★ no cookies · no tracking · no bullshit &nbsp;&nbsp;&nbsp;
+    ★ currently: grinding binary exploitation &nbsp;&nbsp;&nbsp;
+    ★ target: first bug bounty report &nbsp;&nbsp;&nbsp;
+    ★ building in public &nbsp;&nbsp;&nbsp;
+    ★ RMIT Vietnam · IT Year 2 &nbsp;&nbsp;&nbsp;
+    ★ inspired by geohot &amp; orange tsai &nbsp;&nbsp;&nbsp;
+    ★ no cookies · no tracking · no bullshit &nbsp;&nbsp;&nbsp;
+  </span>
+</div>

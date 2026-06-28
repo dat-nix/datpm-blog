@@ -1,0 +1,12 @@
+datpm.com {
+    root * /home/kitty/datpm-blog/dist
+    file_server
+    try_files {path} /index.html
+    encode gzip
+
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        Referrer-Policy no-referrer
+    }
+}

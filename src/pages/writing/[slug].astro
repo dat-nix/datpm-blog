@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Base title={post.data.title} description={post.data.excerpt}>
+  <Nav />
+  <style>
+    .post-header { border-bottom: 3px solid #000; padding: 18px 0; }
+    .post-meta { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #666; margin-bottom: 8px; display: flex; gap: 16px; }
+    .post-title { font-size: clamp(22px, 4vw, 34px); font-weight: 700; line-height: 1.1; margin-bottom: 10px; }
+    .post-excerpt { font-size: 14px; color: #444; border-left: 3px solid #000; padding-left: 10px; line-height: 1.6; margin-bottom: 10px; }
+    .post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-size: 10px; border: 1px solid #000; padding: 1px 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .tag-invert { background: #000; color: #fff; }
+
+    .post-body { padding: 24px 0; max-width: 680px; }
+    .post-body :global(h2) { font-size: 20px; font-weight: 700; margin: 2em 0 0.6em; border-bottom: 1px solid #000; padding-bottom: 4px; }
+    .post-body :global(h3) { font-size: 16px; font-weight: 700; margin: 1.6em 0 0.5em; }
+    .post-body :global(p) { font-size: 15px; line-height: 1.8; margin-bottom: 1.1em; }
+    .post-body :global(ul), .post-body :global(ol) { font-size: 15px; line-height: 1.8; padding-left: 1.4em; margin-bottom: 1.1em; }
+    .post-body :global(li) { margin-bottom: 0.3em; }
+    .post-body :global(a) { color: #000; }
+    .post-body :global(a:hover) { background: #000; color: #fff; }
+
+    .post-nav { border-top: 2px solid #000; padding-top: 14px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  </style>
+
+  <div class="post-header">
+    <div class="post-meta">
+      <span>{post.data.date.toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'})}</span>
+      <span>{post.data.category}</span>
+    </div>
+    <h1 class="post-title">{post.data.title}</h1>
+    <p class="post-excerpt">{post.data.excerpt}</p>
+    <div class="post-tags">
+      {post.data.tags.map((t: string) => <span class="tag">{t}</span>)}
+    </div>
+  </div>
+
+  <div class="post-body">
+    <Content />
+  </div>
+
+  <div class="post-nav">
+    <a href="/writing">← all posts</a>
+    <a href="/">home</a>
+  </div>
+
+  <Footer />
+</Base>

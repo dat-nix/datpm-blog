@@ -76,19 +76,45 @@ const links = [
   @media (prefers-reduced-motion: reduce) {
     .marquee-inner { animation: none; }
   }
+  @media (max-width: 760px) {
+    .nav {
+      padding: 12px 14px;
+      gap: 12px;
+    }
+    .nav-links { gap: 6px; }
+    .nav-links a {
+      padding: 5px 8px 4px;
+      box-shadow: 1px 1px 0 var(--line);
+    }
+  }
   @media (max-width: 560px) {
     .nav {
       align-items: stretch;
       flex-direction: column;
-      padding: 12px;
+      padding: 12px 10px;
     }
+    .nav-name { text-align: center; }
     .nav-links {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       justify-content: stretch;
     }
     .nav-links a { text-align: center; }
-    .marquee-bar { font-size: 10px; }
+    .marquee-bar {
+      font-size: 10px;
+      padding: 5px 0;
+    }
+  }
+  @media (max-width: 420px) {
+    .nav-links {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 4px;
+    }
+    .nav-links a {
+      font-size: 10px;
+      padding-inline: 3px;
+    }
+    .marquee-bar { display: none; }
   }
 </style>
 

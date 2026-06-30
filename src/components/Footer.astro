@@ -29,6 +29,20 @@ const year = new Date().getFullYear();
       margin-right: 12px;
     }
   }
+  @media (max-width: 420px) {
+    footer {
+      padding: 12px 10px;
+      line-height: 1.5;
+    }
+    footer span:last-child {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    footer a {
+      margin: 0;
+    }
+  }
 </style>
 
 <footer>

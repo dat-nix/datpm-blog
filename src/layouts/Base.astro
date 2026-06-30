@@ -46,6 +46,7 @@ const { title = 'datpm.com', description = 'Security notes, CTF writeups, and so
       font-size: 16px;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
     body {
       min-height: 100vh;
@@ -116,6 +117,21 @@ const { title = 'datpm.com', description = 'Security notes, CTF writeups, and so
       }
       .site-shell {
         box-shadow: 6px 6px 0 var(--line);
+      }
+      pre {
+        margin-inline: -4px;
+        padding: 14px;
+        box-shadow: none;
+      }
+    }
+    @media (max-width: 420px) {
+      body {
+        padding: 0;
+      }
+      .site-shell {
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
       }
     }
   </style>

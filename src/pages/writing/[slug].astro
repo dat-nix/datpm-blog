@@ -34,7 +34,7 @@ const { Content } = await render(post);
       gap: 16px;
       flex-wrap: wrap;
     }
-    .post-title { font-size: clamp(38px, 6vw, 68px); font-weight: 700; line-height: 0.98; margin-bottom: 16px; max-width: 860px; }
+    .post-title { font-size: clamp(38px, 6vw, 68px); font-weight: 700; line-height: 0.98; margin-bottom: 16px; max-width: 860px; text-wrap: balance; }
     .post-excerpt { font-size: 16px; color: var(--muted); border-left: 4px solid var(--line); padding-left: 14px; line-height: 1.75; margin-bottom: 16px; max-width: 760px; }
     .post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
     .tag {
@@ -85,12 +85,32 @@ const { Content } = await render(post);
     }
     @media (max-width: 640px) {
       .post-header { padding: 28px 14px 20px; }
+      .post-title { font-size: clamp(32px, 11vw, 48px); }
+      .post-excerpt {
+        font-size: 14px;
+        line-height: 1.65;
+      }
       .post-body { padding: 26px 14px; }
       .post-body :global(p),
       .post-body :global(ul),
       .post-body :global(ol) { font-size: 15px; }
       .post-nav { padding: 16px 14px; }
       .post-nav a { flex: 1; text-align: center; }
+    }
+    @media (max-width: 420px) {
+      .post-header { padding: 22px 10px 16px; }
+      .post-title { font-size: 30px; }
+      .post-meta {
+        gap: 8px;
+        font-size: 9px;
+      }
+      .post-body { padding: 22px 10px; }
+      .post-body :global(h2) { font-size: 21px; }
+      .post-body :global(h3) { font-size: 17px; }
+      .post-nav {
+        flex-direction: column;
+        padding: 14px 10px;
+      }
     }
   </style>
 

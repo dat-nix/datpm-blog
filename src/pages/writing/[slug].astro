@@ -15,24 +15,65 @@ const { Content } = await render(post);
 <Base title={post.data.title} description={post.data.excerpt}>
   <Nav />
   <style>
-    .post-header { border-bottom: 3px solid #000; padding: 18px 0; }
-    .post-meta { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #666; margin-bottom: 8px; display: flex; gap: 16px; }
-    .post-title { font-size: clamp(22px, 4vw, 34px); font-weight: 700; line-height: 1.1; margin-bottom: 10px; }
-    .post-excerpt { font-size: 14px; color: #444; border-left: 3px solid #000; padding-left: 10px; line-height: 1.6; margin-bottom: 10px; }
+    .post-header {
+      border-bottom: 2px solid var(--line);
+      padding: 24px 18px 20px;
+      background: linear-gradient(135deg, rgba(10, 127, 63, 0.1), transparent 52%);
+    }
+    .post-meta {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .post-title { font-size: clamp(30px, 6vw, 52px); font-weight: 700; line-height: 1; margin-bottom: 14px; max-width: 780px; }
+    .post-excerpt { font-size: 15px; color: var(--muted); border-left: 4px solid var(--line); padding-left: 12px; line-height: 1.7; margin-bottom: 14px; max-width: 680px; }
     .post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-    .tag { font-size: 10px; border: 1px solid #000; padding: 1px 6px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .tag-invert { background: #000; color: #fff; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      border: 1px solid var(--line);
+      padding: 2px 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      background: var(--paper);
+    }
+    .tag-invert { background: var(--ink); color: var(--paper); }
 
-    .post-body { padding: 24px 0; max-width: 680px; }
-    .post-body :global(h2) { font-size: 20px; font-weight: 700; margin: 2em 0 0.6em; border-bottom: 1px solid #000; padding-bottom: 4px; }
-    .post-body :global(h3) { font-size: 16px; font-weight: 700; margin: 1.6em 0 0.5em; }
-    .post-body :global(p) { font-size: 15px; line-height: 1.8; margin-bottom: 1.1em; }
-    .post-body :global(ul), .post-body :global(ol) { font-size: 15px; line-height: 1.8; padding-left: 1.4em; margin-bottom: 1.1em; }
-    .post-body :global(li) { margin-bottom: 0.3em; }
-    .post-body :global(a) { color: #000; }
-    .post-body :global(a:hover) { background: #000; color: #fff; }
+    .post-body { padding: 28px 18px; max-width: 720px; }
+    .post-body :global(h2) { font-size: 24px; font-weight: 700; margin: 2.1em 0 0.75em; border-bottom: 2px solid var(--line); padding-bottom: 6px; line-height: 1.15; }
+    .post-body :global(h2:first-child) { margin-top: 0; }
+    .post-body :global(h3) { font-size: 18px; font-weight: 700; margin: 1.7em 0 0.55em; line-height: 1.25; }
+    .post-body :global(p) { font-size: 16px; line-height: 1.85; margin-bottom: 1.1em; color: #24211d; }
+    .post-body :global(ul), .post-body :global(ol) { font-size: 16px; line-height: 1.85; padding-left: 1.5em; margin-bottom: 1.2em; }
+    .post-body :global(li) { margin-bottom: 0.35em; }
+    .post-body :global(a) { color: var(--ink); }
+    .post-body :global(a:hover) { background: var(--ink); color: var(--paper); }
 
-    .post-nav { border-top: 2px solid #000; padding-top: 14px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .post-nav {
+      border-top: 2px solid var(--line);
+      padding: 16px 18px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    @media (max-width: 640px) {
+      .post-header { padding: 22px 12px 18px; }
+      .post-body { padding: 24px 12px; }
+      .post-body :global(p),
+      .post-body :global(ul),
+      .post-body :global(ol) { font-size: 15px; }
+      .post-nav { padding: 14px 12px 0; }
+    }
   </style>
 
   <div class="post-header">

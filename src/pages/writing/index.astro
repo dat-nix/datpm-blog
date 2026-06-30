@@ -10,27 +10,49 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 <Base title="writing">
   <Nav />
   <style>
-    .page-head { border-bottom: 3px solid #000; padding: 16px 0; }
-    .page-head h1 { font-size: 28px; font-weight: 700; }
-    .page-head p { font-size: 13px; color: #444; margin-top: 4px; }
+    .page-head {
+      border-bottom: 2px solid var(--line);
+      padding: 24px 18px 18px;
+      background: linear-gradient(135deg, rgba(10, 127, 63, 0.1), transparent 48%);
+    }
+    .page-head h1 { font-size: clamp(32px, 7vw, 52px); font-weight: 700; line-height: 1; }
+    .page-head p { font-size: 14px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
     .post-list { padding: 0; }
     .post-row {
       display: grid;
       grid-template-columns: 110px 1fr auto;
       gap: 0 16px;
       align-items: baseline;
-      border-bottom: 1px solid #000;
-      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      padding: 14px 18px;
       font-size: 14px;
+      transition: background 120ms ease;
     }
+    .post-row:hover { background: #f4f0e6; }
     .post-row:last-child { border-bottom: none; }
-    .post-date { font-size: 11px; color: #666; font-family: 'Courier New', monospace; white-space: nowrap; }
+    .post-date { font-size: 11px; color: var(--muted); font-family: var(--mono); white-space: nowrap; }
     .post-title { font-weight: 700; text-decoration: none; }
-    .post-title:hover { background: #000; color: #fff; }
-    .post-cat { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
-    .post-tags { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
-    .tag { font-size: 10px; border: 1px solid #000; padding: 0px 5px; text-transform: uppercase; }
+    .post-title:hover { background: var(--ink); color: var(--paper); }
+    .post-cat { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+    .post-tags { display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      border: 1px solid var(--line);
+      padding: 2px 6px;
+      text-transform: uppercase;
+      background: var(--paper);
+    }
     .post-inner { display: flex; flex-direction: column; }
+    @media (max-width: 680px) {
+      .page-head { padding: 22px 12px 16px; }
+      .post-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 14px 12px;
+      }
+      .post-cat { justify-self: start; }
+    }
   </style>
 
   <div class="page-head">

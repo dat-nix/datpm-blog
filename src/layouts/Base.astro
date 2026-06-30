@@ -14,40 +14,88 @@ const { title = 'datpm.com', description = 'Offensive security · CTF · Bug bou
   <title>{title === 'datpm.com' ? title : `${title} · datpm.com`}</title>
   <link rel="alternate" type="application/rss+xml" title="datpm.com" href="/rss.xml" />
   <style>
+    :root {
+      --bg: #faf9f5;
+      --paper: #fffef9;
+      --ink: #111;
+      --muted: #57534e;
+      --faint: #ded9cf;
+      --line: #161616;
+      --accent: #0a7f3f;
+      --accent-soft: #e5f4e9;
+      --code-bg: #ece7dc;
+      --mono: 'Courier New', Courier, monospace;
+      --serif: Georgia, 'Times New Roman', Times, serif;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html {
-      font-family: 'Times New Roman', Times, serif;
-      background: #fff;
-      color: #000;
+      font-family: var(--serif);
+      background:
+        linear-gradient(90deg, rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(17, 17, 17, 0.025) 1px, transparent 1px),
+        var(--bg);
+      background-size: 44px 44px;
+      color: var(--ink);
       font-size: 16px;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
-    body { max-width: 860px; margin: 0 auto; padding: 0 16px; }
-    a { color: #000; }
-    a:hover { background: #000; color: #fff; text-decoration: none; }
+    body {
+      width: min(100% - 28px, 900px);
+      margin: 18px auto;
+      background: var(--paper);
+      border: 2px solid var(--line);
+      box-shadow: 8px 8px 0 var(--line);
+    }
+    a {
+      color: var(--ink);
+      text-underline-offset: 0.18em;
+      text-decoration-thickness: 1px;
+    }
+    a:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      background: var(--accent-soft);
+      color: var(--ink);
+    }
+    ::selection { background: var(--ink); color: var(--paper); }
     code {
-      font-family: 'Courier New', Courier, monospace;
+      font-family: var(--mono);
       font-size: 0.88em;
-      background: #f0f0f0;
-      padding: 1px 5px;
+      background: var(--code-bg);
+      padding: 0.12em 0.35em;
+      border: 1px solid var(--faint);
     }
     pre {
-      background: #111;
-      color: #e0e0e0;
-      padding: 16px;
+      background: #10130f;
+      color: #e9efe6;
+      padding: 18px;
       overflow-x: auto;
       margin: 1.4em 0;
-      border-left: 4px solid #00ff41;
+      border: 2px solid var(--line);
+      border-left: 6px solid var(--accent);
+      box-shadow: 4px 4px 0 var(--line);
     }
     pre code { background: none; color: inherit; padding: 0; font-size: 0.85em; }
     blockquote {
-      border-left: 4px solid #000;
+      border-left: 5px solid var(--line);
+      background: #f3f0e8;
       padding-left: 14px;
-      color: #444;
+      padding: 12px 14px;
+      color: var(--muted);
       margin: 1.2em 0;
       font-style: italic;
     }
-    hr { border: none; border-top: 2px solid #000; margin: 2em 0; }
-    img { max-width: 100%; border: 1px solid #000; }
+    hr { border: none; border-top: 2px solid var(--line); margin: 2em 0; }
+    img { max-width: 100%; border: 2px solid var(--line); }
+    @media (max-width: 640px) {
+      body {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+        box-shadow: 5px 5px 0 var(--line);
+      }
+    }
   </style>
 </head>
 <body>

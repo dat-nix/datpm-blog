@@ -3,7 +3,7 @@ interface Props {
   title?: string;
   description?: string;
 }
-const { title = 'datpm.com', description = 'Offensive security · CTF · Bug bounty · Build log' } = Astro.props;
+const { title = 'datpm.com', description = 'Security notes, CTF writeups, and software experiments.' } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -15,40 +15,57 @@ const { title = 'datpm.com', description = 'Offensive security · CTF · Bug bou
   <link rel="alternate" type="application/rss+xml" title="datpm.com" href="/rss.xml" />
   <style>
     :root {
-      --bg: #faf9f5;
-      --paper: #fffef9;
-      --ink: #111;
-      --muted: #57534e;
-      --faint: #ded9cf;
-      --line: #161616;
-      --accent: #0a7f3f;
-      --accent-soft: #e5f4e9;
-      --code-bg: #ece7dc;
+      --bg: #f6f4ee;
+      --paper: #fffdf6;
+      --paper-2: #f0ece2;
+      --paper-3: #e8f0e8;
+      --ink: #10100e;
+      --muted: #625d52;
+      --soft: #d8d1c2;
+      --line: #181714;
+      --accent: #116b45;
+      --accent-2: #9dff6e;
+      --accent-soft: #e1f0e5;
+      --link: #3f2ca1;
+      --code-bg: #ebe5d8;
       --mono: 'Courier New', Courier, monospace;
       --serif: Georgia, 'Times New Roman', Times, serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
     html {
-      font-family: var(--serif);
+      font-family: var(--sans);
       background:
-        linear-gradient(90deg, rgba(17, 17, 17, 0.035) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(17, 17, 17, 0.025) 1px, transparent 1px),
+        radial-gradient(circle at 18% 6%, rgba(17, 107, 69, 0.16), transparent 28%),
+        linear-gradient(90deg, rgba(16, 16, 14, 0.045) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(16, 16, 14, 0.035) 1px, transparent 1px),
         var(--bg);
-      background-size: 44px 44px;
+      background-size: 100% 100%, 48px 48px, 48px 48px;
       color: var(--ink);
       font-size: 16px;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
     }
     body {
-      width: min(900px, calc(100% - 28px));
-      margin: 18px auto;
+      min-height: 100vh;
+      padding: 18px;
+      color: var(--ink);
+      display: grid;
+      justify-items: center;
+      align-items: start;
+    }
+    .site-shell {
+      width: 100%;
+      max-width: 1120px;
+      margin-inline: auto;
       background: var(--paper);
       border: 2px solid var(--line);
-      box-shadow: 8px 8px 0 var(--line);
+      box-shadow: 10px 10px 0 var(--line);
+      overflow: clip;
     }
     a {
-      color: var(--ink);
+      color: var(--link);
       text-underline-offset: 0.18em;
       text-decoration-thickness: 1px;
     }
@@ -65,7 +82,7 @@ const { title = 'datpm.com', description = 'Offensive security · CTF · Bug bou
       font-size: 0.88em;
       background: var(--code-bg);
       padding: 0.12em 0.35em;
-      border: 1px solid var(--faint);
+      border: 1px solid var(--soft);
     }
     pre {
       background: #10130f;
@@ -78,6 +95,10 @@ const { title = 'datpm.com', description = 'Offensive security · CTF · Bug bou
       box-shadow: 4px 4px 0 var(--line);
     }
     pre code { background: none; color: inherit; padding: 0; font-size: 0.85em; }
+    h1, h2, h3 {
+      font-family: var(--serif);
+      letter-spacing: 0;
+    }
     blockquote {
       border-left: 5px solid var(--line);
       background: #f3f0e8;
@@ -91,14 +112,17 @@ const { title = 'datpm.com', description = 'Offensive security · CTF · Bug bou
     img { max-width: 100%; border: 2px solid var(--line); }
     @media (max-width: 640px) {
       body {
-        width: calc(100% - 20px);
-        margin: 10px auto;
-        box-shadow: 5px 5px 0 var(--line);
+        padding: 8px;
+      }
+      .site-shell {
+        box-shadow: 6px 6px 0 var(--line);
       }
     }
   </style>
 </head>
 <body>
-  <slot />
+  <div class="site-shell">
+    <slot />
+  </div>
 </body>
 </html>

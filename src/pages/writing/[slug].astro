@@ -17,8 +17,11 @@ const { Content } = await render(post);
   <style>
     .post-header {
       border-bottom: 2px solid var(--line);
-      padding: 24px 18px 20px;
-      background: linear-gradient(135deg, rgba(10, 127, 63, 0.1), transparent 52%);
+      padding: clamp(30px, 5vw, 58px) 28px 30px;
+      background:
+        linear-gradient(135deg, rgba(17, 107, 69, 0.18), transparent 52%),
+        linear-gradient(180deg, var(--paper), #f5f1e7),
+        var(--paper);
     }
     .post-meta {
       font-family: var(--mono);
@@ -31,8 +34,8 @@ const { Content } = await render(post);
       gap: 16px;
       flex-wrap: wrap;
     }
-    .post-title { font-size: clamp(30px, 6vw, 52px); font-weight: 700; line-height: 1; margin-bottom: 14px; max-width: 780px; }
-    .post-excerpt { font-size: 15px; color: var(--muted); border-left: 4px solid var(--line); padding-left: 12px; line-height: 1.7; margin-bottom: 14px; max-width: 680px; }
+    .post-title { font-size: clamp(38px, 6vw, 68px); font-weight: 700; line-height: 0.98; margin-bottom: 16px; max-width: 860px; }
+    .post-excerpt { font-size: 16px; color: var(--muted); border-left: 4px solid var(--line); padding-left: 14px; line-height: 1.75; margin-bottom: 16px; max-width: 760px; }
     .post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
     .tag {
       font-family: var(--mono);
@@ -45,11 +48,16 @@ const { Content } = await render(post);
     }
     .tag-invert { background: var(--ink); color: var(--paper); }
 
-    .post-body { padding: 28px 18px; max-width: 720px; }
+    .post-body {
+      padding: 38px 28px;
+      max-width: 820px;
+      margin-inline: auto;
+      background: var(--paper);
+    }
     .post-body :global(h2) { font-size: 24px; font-weight: 700; margin: 2.1em 0 0.75em; border-bottom: 2px solid var(--line); padding-bottom: 6px; line-height: 1.15; }
     .post-body :global(h2:first-child) { margin-top: 0; }
     .post-body :global(h3) { font-size: 18px; font-weight: 700; margin: 1.7em 0 0.55em; line-height: 1.25; }
-    .post-body :global(p) { font-size: 16px; line-height: 1.85; margin-bottom: 1.1em; color: #24211d; }
+    .post-body :global(p) { font-family: var(--serif); font-size: 18px; line-height: 1.82; margin-bottom: 1.1em; color: #24211d; }
     .post-body :global(ul), .post-body :global(ol) { font-size: 16px; line-height: 1.85; padding-left: 1.5em; margin-bottom: 1.2em; }
     .post-body :global(li) { margin-bottom: 0.35em; }
     .post-body :global(a) { color: var(--ink); }
@@ -57,7 +65,7 @@ const { Content } = await render(post);
 
     .post-nav {
       border-top: 2px solid var(--line);
-      padding: 16px 18px 0;
+      padding: 18px 28px;
       display: flex;
       justify-content: space-between;
       gap: 12px;
@@ -65,14 +73,24 @@ const { Content } = await render(post);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      background: var(--paper-2);
+    }
+    .post-nav a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      box-shadow: 2px 2px 0 var(--line);
+      background: var(--paper);
+      padding: 8px 10px;
     }
     @media (max-width: 640px) {
-      .post-header { padding: 22px 12px 18px; }
-      .post-body { padding: 24px 12px; }
+      .post-header { padding: 28px 14px 20px; }
+      .post-body { padding: 26px 14px; }
       .post-body :global(p),
       .post-body :global(ul),
       .post-body :global(ol) { font-size: 15px; }
-      .post-nav { padding: 14px 12px 0; }
+      .post-nav { padding: 16px 14px; }
+      .post-nav a { flex: 1; text-align: center; }
     }
   </style>
 

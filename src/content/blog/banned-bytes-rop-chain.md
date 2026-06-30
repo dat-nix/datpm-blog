@@ -3,7 +3,7 @@ title: "banned_bytes: ROP chain khi byteset bị filter"
 date: 2026-06-28
 category: "CTF · Binary Exploitation"
 tags: ["pwn", "rop", "x86-64", "tbctf"]
-excerpt: "Bài này filter hết các byte thông dụng trong gadget. Giải pháp: XOR-encode payload, tự viết decoder stub vào BSS, rồi jump sang đó. Mất 6 tiếng mới ra được chain hoàn chỉnh."
+excerpt: "Challenge filter một số byte trong địa chỉ gadget, nên chain trực tiếp không ổn định. Ghi chú này đi qua hướng XOR-encode payload, đặt decoder stub vào BSS, rồi chuyển luồng thực thi sang đó."
 ---
 
 ## Overview
@@ -52,6 +52,6 @@ KEY = 0x41  # byte 'A', không bị ban
 
 ## Bài học
 
-Khi ROP bị constrain, không cố tìm gadget "perfect" — thay vào đó tự build primitive nhỏ hơn và chain lại. Đây là mindset quan trọng hơn biết nhiều gadget.
+Khi ROP bị constrain, thay vì cố tìm gadget hoàn hảo, có thể chia bài toán thành các primitive nhỏ hơn rồi nối chúng lại. Cách tiếp cận này thường hữu ích hơn việc chỉ mở rộng danh sách gadget.
 
 Flag: `NCT{r0p_wh3n_bytes_are_banned}`

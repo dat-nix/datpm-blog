@@ -10,16 +10,17 @@ const links = [
 <style>
   .nav {
     border-bottom: 2px solid var(--line);
-    padding: 12px 18px;
+    padding: 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 14px;
+    gap: 18px;
+    background: var(--paper);
   }
   .nav-name {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
     background: none !important;
@@ -30,17 +31,19 @@ const links = [
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: 6px;
+    gap: 8px;
   }
   .nav-links a {
     font-size: 12px;
+    font-family: var(--mono);
     text-decoration: none;
     border: 1px solid var(--line);
-    padding: 4px 9px;
-    letter-spacing: 0.04em;
+    padding: 5px 9px 4px;
+    letter-spacing: 0;
     background: var(--paper);
     box-shadow: 2px 2px 0 var(--line);
-    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    color: var(--ink);
+    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease, color 120ms ease;
   }
   .nav-links a:hover {
     transform: translate(1px, 1px);
@@ -55,19 +58,20 @@ const links = [
     color: var(--paper);
     font-family: var(--mono);
     font-size: 11px;
-    padding: 5px 0;
+    padding: 6px 0;
     overflow: hidden;
     white-space: nowrap;
     border-bottom: 2px solid var(--line);
   }
   .marquee-inner {
     display: inline-block;
-    animation: marquee 22s linear infinite;
-    padding-left: 12px;
+    min-width: max-content;
+    animation: marquee 34s linear infinite;
+    padding-left: 20px;
   }
   @keyframes marquee {
     from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    to   { transform: translateX(-45%); }
   }
   @media (prefers-reduced-motion: reduce) {
     .marquee-inner { animation: none; }
@@ -84,6 +88,7 @@ const links = [
       justify-content: stretch;
     }
     .nav-links a { text-align: center; }
+    .marquee-bar { font-size: 10px; }
   }
 </style>
 
@@ -100,17 +105,15 @@ const links = [
 
 <div class="marquee-bar">
   <span class="marquee-inner">
-    ★ currently: grinding binary exploitation &nbsp;&nbsp;&nbsp;
-    ★ target: first bug bounty report &nbsp;&nbsp;&nbsp;
-    ★ building in public &nbsp;&nbsp;&nbsp;
+    ★ binary exploitation notes &nbsp;&nbsp;&nbsp;
+    ★ CTF writeups and lab logs &nbsp;&nbsp;&nbsp;
     ★ RMIT Vietnam · IT Year 2 &nbsp;&nbsp;&nbsp;
-    ★ inspired by geohot &amp; orange tsai &nbsp;&nbsp;&nbsp;
-    ★ no cookies · no tracking · no bullshit &nbsp;&nbsp;&nbsp;
-    ★ currently: grinding binary exploitation &nbsp;&nbsp;&nbsp;
-    ★ target: first bug bounty report &nbsp;&nbsp;&nbsp;
-    ★ building in public &nbsp;&nbsp;&nbsp;
+    ★ small experiments, documented clearly &nbsp;&nbsp;&nbsp;
+    ★ RSS available · no analytics &nbsp;&nbsp;&nbsp;
+    ★ binary exploitation notes &nbsp;&nbsp;&nbsp;
+    ★ CTF writeups and lab logs &nbsp;&nbsp;&nbsp;
     ★ RMIT Vietnam · IT Year 2 &nbsp;&nbsp;&nbsp;
-    ★ inspired by geohot &amp; orange tsai &nbsp;&nbsp;&nbsp;
-    ★ no cookies · no tracking · no bullshit &nbsp;&nbsp;&nbsp;
+    ★ small experiments, documented clearly &nbsp;&nbsp;&nbsp;
+    ★ RSS available · no analytics &nbsp;&nbsp;&nbsp;
   </span>
 </div>

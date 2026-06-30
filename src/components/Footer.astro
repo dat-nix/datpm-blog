@@ -4,25 +4,25 @@ const year = new Date().getFullYear();
 <style>
   footer {
     border-top: 2px solid var(--line);
-    padding: 14px 18px;
+    padding: 16px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
     font-size: 11px;
-    margin-top: 2rem;
     color: var(--muted);
+    background: var(--paper);
   }
   footer a {
     font-size: 11px;
     margin-left: 14px;
-    color: var(--ink);
+    color: var(--link);
   }
   @media (max-width: 560px) {
     footer {
       align-items: flex-start;
       flex-direction: column;
-      padding: 14px 12px;
+      padding: 14px;
     }
     footer a {
       margin-left: 0;
@@ -32,7 +32,7 @@ const year = new Date().getFullYear();
 </style>
 
 <footer>
-  <span>© {year} Phạm Minh Đạt · no cookies · no tracking · no bullshit</span>
+  <span>© {year} Phạm Minh Đạt · notes on security, CTFs, and software</span>
   <span>
     <a href="/rss.xml">rss</a>
     <a href="/about#pgp">pgp</a>

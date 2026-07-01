@@ -1,7 +1,7 @@
 datpm.com {
     root * /home/kitty/datpm-blog/dist
+    try_files {path} {path}/index.html /index.html
     file_server
-    try_files {path} /index.html
     encode gzip
 
     header {

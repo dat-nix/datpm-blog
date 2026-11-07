@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "qa": "npm run build && node scripts/publication-qa.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

@@ -1,0 +1,16 @@
+---
+const currentPath = Astro.url.pathname;
+const links = [{ href:'/writing', label:'writing' }, { href:'https://github.com/datpm', label:'github', external:true }];
+---
+<style>
+  .nav { display:flex; justify-content:space-between; align-items:baseline; padding:34px 0 26px; border-bottom:1px solid var(--line); }
+  .name { font-family:var(--serif); font-size:22px; text-decoration:none; letter-spacing:-.03em; }
+  .name small { font:11px var(--mono); color:var(--muted); margin-left:8px; letter-spacing:0; }
+  .links { display:flex; gap:22px; font:12px var(--mono); } .links a { text-decoration:none; color:var(--muted); }
+  .links a:hover,.links a.active { color:var(--accent); }
+  @media(max-width:520px) { .nav { padding:24px 0 20px; } .name small { display:none; } .links { gap:14px; } }
+</style>
+<nav class="nav" aria-label="Main navigation">
+  <a class="name" href="/">datpm <small>notes from the edge of the syllabus</small></a>
+  <div class="links">{links.map(link => <a href={link.href} class={currentPath.startsWith(link.href) ? 'active' : ''} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener' : undefined}>{link.label}</a>)}</div>
+</nav>

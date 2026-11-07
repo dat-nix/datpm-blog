@@ -1,55 +1,53 @@
 ---
-const year = new Date().getFullYear();
 ---
 <style>
-  footer {
-    border-top: 2px solid var(--line);
+  .datpm-footer {
     padding: 16px 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: 12px;
     font-size: 11px;
     color: var(--muted);
     background: var(--paper);
   }
-  footer a {
+  .datpm-footer a {
     font-size: 11px;
     margin-left: 14px;
     color: var(--link);
   }
   @media (max-width: 560px) {
-    footer {
+    .datpm-footer {
       align-items: flex-start;
       flex-direction: column;
       padding: 14px;
     }
-    footer a {
+    .datpm-footer a {
       margin-left: 0;
       margin-right: 12px;
     }
   }
   @media (max-width: 420px) {
-    footer {
+    .datpm-footer {
       padding: 12px 10px;
       line-height: 1.5;
     }
-    footer span:last-child {
+    .datpm-footer span:last-child {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
-    footer a {
+    .datpm-footer a {
       margin: 0;
     }
   }
 </style>
 
-<footer>
-  <span>© {year} Phạm Minh Đạt · notes on security, CTFs, and software</span>
+<footer class="datpm-footer">
   <span>
-    <a href="/rss.xml">rss</a>
     <a href="/about#pgp">pgp</a>
-    <a href="https://github.com/datpm" target="_blank" rel="noopener">github</a>
+    <a href="https://github.com/dat-nix" target="_blank" rel="noopener">github</a>
+    <a href="mailto:dtpm4269@gmail.com">email</a>
+    <a href="https://www.facebook.com/minh.at.339907/" target="_blank" rel="noopener">facebook</a>
   </span>
 </footer>

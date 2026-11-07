@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import EditorialPage from '../components/EditorialPage.astro';
+---
+<Base title="portfolio">
+  <Nav />
+  <style>
+    .datpm-portfolio-layout { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(240px,.8fr); gap:48px; align-items:start; }
+    .datpm-portfolio-layout h2 { margin-top:0; }
+    .datpm-portfolio-milestones { margin:0; }
+    .datpm-portfolio-milestone { display:grid; grid-template-columns:110px minmax(0,1fr); gap:18px; padding:18px 0; }
+    .datpm-portfolio-milestone:first-child { padding-top:0; }
+    .datpm-portfolio-milestone dt { color:var(--accent); font-family:var(--meta); font-size:.85em; padding-top:3px; }
+    .datpm-portfolio-milestone dd { margin:0; }
+    .datpm-portfolio-milestone h3, .datpm-portfolio-skill h3 { margin:0; }
+    .datpm-portfolio-milestone p, .datpm-portfolio-skill p { margin:5px 0 0; }
+    .datpm-portfolio-milestone a { display:inline-block; margin-top:8px; }
+    .datpm-portfolio-skills { display:flex; flex-direction:column; gap:22px; }
+    .datpm-portfolio-skill + .datpm-portfolio-skill { padding-top:18px; }
+    .datpm-portfolio-certificates { margin-top:42px; padding-top:18px; }
+    .datpm-portfolio-certificate-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .datpm-portfolio-certificate img { display:block; width:100%; aspect-ratio:16 / 10; object-fit:cover; border:1px solid var(--line); }
+    .datpm-portfolio-certificate h3 { margin:16px 0 0; font-size:1rem; }
+    .datpm-portfolio-certificate p { margin:5px 0 0; font-size:.92em; }
+    @media (max-width:760px) { .datpm-portfolio-layout, .datpm-portfolio-certificate-grid { grid-template-columns:1fr; } }
+    @media (max-width:520px) { .datpm-portfolio-milestone { grid-template-columns:1fr; gap:5px; } }
+  </style>
+  <EditorialPage title="Portfolio.">
+    <div class="datpm-portfolio-layout">
+      <section aria-labelledby="milestones-title">
+        <h2 id="milestones-title">Achievements &amp; Milestones</h2>
+        <dl class="datpm-portfolio-milestones">
+          <div class="datpm-portfolio-milestone"><dt>2026</dt><dd><h3>CSCV2026 · Redback Crawlers Ensemble</h3><p>Second prize in the B (Jeopardy) category with the RMIT University team.</p><a href="/writing/cscv2026#competition-result">Read the solved writeups →</a></dd></div>
+          <div class="datpm-portfolio-milestone"><dt>2026</dt><dd><h3>Cyber Apocalypse CTF · Hack The Box</h3><p>126/136 challenges solved with the RMIT Cybersecurity Hub team; rank 156/6744.</p><a href="/writing/cyber-apocalypse-2026">Read the solved writeups →</a></dd></div>
+          <div class="datpm-portfolio-milestone"><dt>2026</dt><dd><h3>scriptCTF 2026</h3><p>Certificate of participation with Redback Crawlers Ensemble; finishing position 55/1249.</p></dd></div>
+          <div class="datpm-portfolio-milestone"><dt>Ongoing</dt><dd><h3>Security writing and research</h3><p>Turning challenge solutions, experiments, and investigation notes into readable technical writeups.</p><a href="/writing">Browse the writing archive →</a></dd></div>
+        </dl>
+      </section>
+      <aside class="datpm-portfolio-skills" aria-labelledby="skills-title">
+        <h2 id="skills-title">Skills &amp; Repertoire</h2>
+        <div class="datpm-portfolio-skill"><h3>Cybersecurity</h3><p>Web security, reverse engineering, binary exploitation, forensics, and CTF problem solving.</p></div>
+        <div class="datpm-portfolio-skill"><h3>Research</h3><p>Evidence-backed analysis, reproducible experiments, and clear technical documentation.</p></div>
+        <div class="datpm-portfolio-skill"><h3>Current focus</h3><p>Building practical security tooling and publishing useful notes from the work behind the scenes.</p></div>
+        <div class="datpm-portfolio-skill"><h3>Code</h3><p><a href="https://github.com/dat-nix" target="_blank" rel="noopener">github.com/dat-nix ↗</a></p></div>
+      </aside>
+    </div>
+    <section class="datpm-portfolio-certificates" aria-labelledby="certificates-title">
+      <h2 id="certificates-title">Certificates</h2>
+      <div class="datpm-portfolio-certificate-grid">
+        <article class="datpm-portfolio-certificate"><img src="/certificates/cscv2026-redback-crawlers-certificate.jpg" alt="Certificate of commendation for Redback Crawlers Ensemble from CSCV2026" loading="lazy" /><h3>CSCV2026 · second prize</h3><p><a href="/writing/cscv2026#competition-result">View achievement →</a></p></article>
+        <article class="datpm-portfolio-certificate"><img src="/certificates/cyber-apocalypse-2026-certificate.png" alt="Hack The Box Cyber Apocalypse CTF 2026 certificate for datnix" loading="lazy" /><h3>Cyber Apocalypse CTF 2026</h3><p><a href="/certificates/cyber-apocalypse-2026-certificate.pdf">Open original PDF →</a></p></article>
+        <article class="datpm-portfolio-certificate"><img src="/certificates/scriptctf-2026-certificate.png" alt="Certificate of participation in scriptCTF 2026 for datnix" loading="lazy" /><h3>scriptCTF 2026</h3><p><a href="/certificates/scriptctf-2026-certificate.png">Open certificate image →</a></p></article>
+      </div>
+    </section>
+  </EditorialPage>
+  <Footer />
+</Base>

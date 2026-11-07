@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro'; import Nav from '../components/Nav.astro'; import Footer from '../components/Footer.astro'; import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Base><Nav />
+<style>
+  .intro { padding:76px 0 68px; border-bottom:1px solid var(--line); max-width:760px; } .kicker { font:11px var(--mono); color:var(--accent); letter-spacing:.12em; text-transform:uppercase; }
+  h1 { font:normal clamp(44px,8vw,86px)/.96 var(--serif); letter-spacing:-.055em; margin:18px 0 22px; max-width:700px; } .lead { color:var(--muted); font-size:18px; line-height:1.65; max-width:590px; }
+  .home-grid { display:grid; grid-template-columns:minmax(0,1fr) 220px; gap:64px; padding:48px 0 72px; } .section-label { font:11px var(--mono); color:var(--muted); letter-spacing:.12em; text-transform:uppercase; margin-bottom:20px; }
+  .post { padding:22px 0 25px; border-top:1px solid var(--line); } .post:first-of-type { border-top:2px solid var(--ink); } .meta { font:11px var(--mono); color:var(--muted); margin-bottom:8px; } .post h2 { font:normal 28px/1.15 var(--serif); margin-bottom:8px; } .post h2 a { text-decoration:none; } .post p { color:var(--muted); line-height:1.6; max-width:60ch; }
+  .more { display:inline-block; margin-top:20px; font:12px var(--mono); color:var(--accent); } aside { border-top:2px solid var(--ink); padding-top:15px; } aside p { color:var(--muted); font:14px/1.65 var(--serif); margin-bottom:22px; } .note { font:11px/1.6 var(--mono); color:var(--muted); border-top:1px solid var(--line); padding-top:14px; }
+  @media(max-width:700px) { .intro { padding:52px 0 48px; } .home-grid { grid-template-columns:1fr; gap:42px; padding:34px 0 50px; } }
+</style>
+<main>
+  <section class="intro"><div class="kicker">security notes · ctf writeups · things I broke</div><h1>I study systems, then try to explain what happened.</h1><p class="lead">A personal archive of binary exploitation, reverse engineering, and the occasional side quest. Written after the adrenaline wears off.</p></section>
+  <div class="home-grid"><section><div class="section-label">recent writing</div>{posts.slice(0,5).map(post => <article class="post"><div class="meta">{post.data.date.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})} · {post.data.category}</div><h2><a href={`/writing/${post.id}`}>{post.data.title}</a></h2><p>{post.data.excerpt}</p></article>)}<a class="more" href="/writing">browse all writing →</a></section><aside><div class="section-label">about this place</div><p>Notes from learning offensive security, running CTFs, and building small things.</p><div class="note">No algorithmic feed.<br />No tracking.<br />Just the archive.</div></aside></div>
+</main><Footer /></Base>

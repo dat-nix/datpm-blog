@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+<style>
+  .datpm-page-head { padding: 62px 0 34px; }
+  .datpm-page-head h1 { max-width: 850px; margin: 14px 0 18px; color: var(--ink); font: normal clamp(48px, 9vw, 92px)/.92 var(--serif); letter-spacing: -.07em; }
+  .datpm-page-body { max-width: 760px; padding: 38px 0 78px; }
+  .datpm-page-body :global(h2) { margin: 38px 0 13px; color: var(--ink); font: normal 30px/1.1 var(--serif); letter-spacing: -.04em; }
+  .datpm-page-body :global(h3) { margin: 26px 0 7px; color: var(--ink); font: normal 22px/1.15 var(--serif); }
+  .datpm-page-body :global(p), .datpm-page-body :global(li) { color: var(--ink); font: 16px/1.7 var(--serif); }
+  .datpm-page-body :global(ul) { padding-left: 20px; }
+  .datpm-page-body :global(li + li) { margin-top: 7px; }
+  .datpm-page-body :global(a) { color: var(--link); }
+  @media (max-width: 640px) { .datpm-page-head { padding: 45px 0 28px; } .datpm-page-body { padding-top: 28px; } }
+</style>
+<main>
+  <header class="datpm-page-head">
+    <h1>{title}</h1>
+  </header>
+  <div class="datpm-page-body"><slot /></div>
+</main>

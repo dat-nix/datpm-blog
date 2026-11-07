@@ -1,145 +1,37 @@
 ---
 const currentPath = Astro.url.pathname;
 const links = [
-  { href: '/writing', label: 'writing' },
-  { href: '/ctf', label: 'ctf' },
-  { href: '/projects', label: 'projects' },
-  { href: '/about', label: 'about' },
+  { href: '/about', label: 'About' },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/writing', label: 'Writing' },
+  { href: '/links', label: 'Links' },
 ];
 ---
 <style>
-  .nav {
-    border-bottom: 2px solid var(--line);
-    padding: 14px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 18px;
-    background: var(--paper);
-  }
-  .nav-name {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    background: none !important;
-    color: var(--ink) !important;
-    white-space: nowrap;
-  }
-  .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 8px;
-  }
-  .nav-links a {
-    font-size: 12px;
-    font-family: var(--mono);
-    text-decoration: none;
-    border: 1px solid var(--line);
-    padding: 5px 9px 4px;
-    letter-spacing: 0;
-    background: var(--paper);
-    box-shadow: 2px 2px 0 var(--line);
-    color: var(--ink);
-    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease, color 120ms ease;
-  }
-  .nav-links a:hover {
-    transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0 var(--line);
-  }
-  .nav-links a.active {
-    background: var(--ink);
-    color: var(--paper);
-  }
-  .marquee-bar {
-    background: var(--ink);
-    color: var(--paper);
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 6px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    border-bottom: 2px solid var(--line);
-  }
-  .marquee-inner {
-    display: inline-block;
-    min-width: max-content;
-    animation: marquee 34s linear infinite;
-    padding-left: 20px;
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-45%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-inner { animation: none; }
-  }
-  @media (max-width: 760px) {
-    .nav {
-      padding: 12px 14px;
-      gap: 12px;
-    }
-    .nav-links { gap: 6px; }
-    .nav-links a {
-      padding: 5px 8px 4px;
-      box-shadow: 1px 1px 0 var(--line);
-    }
-  }
-  @media (max-width: 560px) {
-    .nav {
-      align-items: stretch;
-      flex-direction: column;
-      padding: 12px 10px;
-    }
-    .nav-name { text-align: center; }
-    .nav-links {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      justify-content: stretch;
-    }
-    .nav-links a { text-align: center; }
-    .marquee-bar {
-      font-size: 10px;
-      padding: 5px 0;
-    }
+  .datpm-nav { padding: 24px 0 0; }
+  .datpm-nav-top { display: grid; grid-template-columns: 1fr; justify-items: center; gap: 18px; padding-bottom: 18px; }
+  .datpm-nav-year { text-align: right; }
+  .datpm-wordmark { color: var(--ink); font: normal 36px/.85 var(--serif); letter-spacing: -.06em; text-decoration: none; }
+  .datpm-wordmark:hover { color: var(--accent); }
+  .datpm-nav-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 26px; padding: 12px 0 13px; }
+  .datpm-nav-links a { color: var(--ink); font: 700 13px var(--sans); text-decoration: none; }
+  .datpm-nav-links a:hover, .datpm-nav-links a.active { color: var(--accent); }
+  @media (max-width: 640px) {
+    .datpm-nav { padding-top: 18px; }
+    .datpm-nav-top { grid-template-columns: 1fr; align-items: center; }
+    .datpm-wordmark { font-size: 32px; }
+    .datpm-nav-links { justify-content: flex-start; gap: 17px; }
   }
   @media (max-width: 420px) {
-    .nav-links {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 4px;
-    }
-    .nav-links a {
-      font-size: 10px;
-      padding-inline: 3px;
-    }
-    .marquee-bar { display: none; }
+    .datpm-nav-links { gap: 12px 16px; }
+    .datpm-nav-links a { font-size: 12px; }
   }
 </style>
-
-<nav class="nav">
-  <a href="/" class="nav-name">datpm.com</a>
-  <div class="nav-links">
-    {links.map(l => (
-      <a href={l.href} class={currentPath.startsWith(l.href) ? 'active' : ''}>
-        {l.label}
-      </a>
-    ))}
+<header class="datpm-nav">
+  <div class="datpm-nav-top">
+    <a class="datpm-wordmark" href="/">datpm</a>
   </div>
-</nav>
-
-<div class="marquee-bar">
-  <span class="marquee-inner">
-    ★ binary exploitation notes &nbsp;&nbsp;&nbsp;
-    ★ CTF writeups and lab logs &nbsp;&nbsp;&nbsp;
-    ★ RMIT Vietnam · IT Year 2 &nbsp;&nbsp;&nbsp;
-    ★ small experiments, documented clearly &nbsp;&nbsp;&nbsp;
-    ★ RSS available · no analytics &nbsp;&nbsp;&nbsp;
-    ★ binary exploitation notes &nbsp;&nbsp;&nbsp;
-    ★ CTF writeups and lab logs &nbsp;&nbsp;&nbsp;
-    ★ RMIT Vietnam · IT Year 2 &nbsp;&nbsp;&nbsp;
-    ★ small experiments, documented clearly &nbsp;&nbsp;&nbsp;
-    ★ RSS available · no analytics &nbsp;&nbsp;&nbsp;
-  </span>
-</div>
+  <nav class="datpm-nav-links" aria-label="Main navigation">
+    {links.map(link => <a href={link.href} class={currentPath === link.href || (link.href !== '/' && currentPath.startsWith(`${link.href}/`)) ? 'active' : ''}>{link.label}</a>)}
+  </nav>
+</header>

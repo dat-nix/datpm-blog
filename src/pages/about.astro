@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import EditorialPage from '../components/EditorialPage.astro';
+---
+<Base title="about">
+  <Nav />
+  <EditorialPage title="About this notebook.">
+    <h2>What lives here</h2>
+    <p>I'm Phạm Minh Đạt. I spend a lot of time with CTFs, binary exploitation, web security, reverse engineering, and small software experiments. I keep notes here from work I actually did.</p>
+    <p>Most of these notes start with something concrete: a changed response, a register value, a parser disagreement, or a solver output that finally printed a flag.</p>
+    <h2>How I write</h2>
+    <p>Short challenges can stay short. Complicated ones should show the path: what the input reaches, where the trust boundary is, which primitive is gained, how the next constraint is handled, and how the result was checked.</p>
+    <p>If a result comes only from a checked-in fixture or a solver note, I label it that way. A plausible explanation is not a reproduction.</p>
+    <h2 id="pgp">Contact</h2>
+    <p>The best way to find the source files behind a post is through <a href="https://github.com/dat-nix" target="_blank" rel="noopener">GitHub</a>. You can also reach me by <a href="mailto:dtpm4269@gmail.com">email</a> or <a href="https://www.facebook.com/minh.at.339907/" target="_blank" rel="noopener">Facebook</a>.</p>
+  </EditorialPage>
+  <Footer />
+</Base>

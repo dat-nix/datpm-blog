@@ -11,16 +11,9 @@ TraceBash CTF 2026 ran from 26 to 27 June 2026. I am keeping the two solved chal
 
 The handout contains a local fixture, so the local run prints `TBCTF{dummy}`. The recorded competition result is `TBCTF{r0p_byp4551ng_ch4r5_4r3_s0_3z}`. I keep those two results separate below instead of pretending that the dummy string is the remote flag.
 
-## Contents
-
-- [Pwn](#pwn)
-  - [Banned Bytes](#pwn-01-banned-bytes--a-rop-chain-around-filtered-characters)
-- [Web](#web)
-  - [Ping Me](#web-01-ping-me--a-15-byte-command-injection)
-
 ## Pwn
 
-### [PWN-01] Banned Bytes — a ROP chain around filtered characters
+### Banned Bytes — a ROP chain around filtered characters
 
 #### What the handout gives us
 
@@ -213,7 +206,7 @@ The real fix is much less clever: bound the read to the size of the destination 
 
 ## Web
 
-### [WEB-01] Ping Me — a 15-byte command injection
+### Ping Me — a 15-byte command injection
 
 This challenge looks like a tiny network utility with a very opinionated input box: fifteen characters, no letters, digits and dots only. The page even flashes a warning when a letter is typed. That made the first step easy to guess: the interesting part was not the frontend, but the small Flask endpoint behind it.
 

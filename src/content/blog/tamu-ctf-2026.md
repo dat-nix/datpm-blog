@@ -9,15 +9,9 @@ excerpt: "Three TAMU CTF 2026 solves: finding an HTTP/3-only origin, restoring s
 
 I solved three TAMU CTF 2026 challenges: Broken Website, Choppy, and numbers. They ended up being three different kinds of debugging—network transport, messy audio, and signal reconstruction.
 
-## Contents
-
-- [Broken Website](#tamu-web-01-broken-website--when-the-web-server-only-speaks-http3)
-- [Choppy](#tamu-misc-01-choppy--sorting-audio-by-its-sweep-tone)
-- [numbers](#tamu-misc-02-numbers--rebuilding-audio-from-an-stft-dump)
-
 ## Web
 
-### [TAMU-WEB-01] Broken Website — when the web server only speaks HTTP/3
+### Broken Website — when the web server only speaks HTTP/3
 
 **Category:** Web · **Points:** 110  
 **Result:** solved against the public challenge endpoint  
@@ -78,7 +72,7 @@ The final request returned an HTTP/3 200 response from Caddy with the flag in th
 
 ## Audio Forensics
 
-### [TAMU-MISC-01] Choppy — sorting audio by its sweep tone
+### Choppy — sorting audio by its sweep tone
 
 **Category:** Audio Forensics  
 **Result:** reconstructed audio and decoded the spoken flag  
@@ -143,7 +137,7 @@ A normal band-pass filter cannot cleanly remove the sweep because it overlaps th
 
 ## Signal Processing
 
-### [TAMU-MISC-02] numbers — rebuilding audio from an STFT dump
+### numbers — rebuilding audio from an STFT dump
 
 **Category:** Misc / Signal Processing  
 **Result:** reconstructed the audio and recovered the lowercase flag  

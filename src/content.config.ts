@@ -11,6 +11,8 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     excerpt: z.string().default('A technical writeup from my CTF notes.'),
     draft: z.boolean().default(false),
+    tocDepth: z.number().int().min(2).max(3).optional(),
+    tocExclude: z.array(z.string()).default([]),
   }),
 });
 

@@ -10,15 +10,38 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings = [] } = await render(post);
+const tocDepth = post.data.tocDepth ?? 3;
+const tocExclude = new Set(post.data.tocExclude);
+type ContentsItem = { label: string; href: string; children?: ContentsItem[] };
+const contents: ContentsItem[] = [];
+let parent: ContentsItem | undefined;
+for (const heading of headings) {
+  if (heading.depth < 2 || heading.depth > tocDepth || tocExclude.has(heading.text)) continue;
+  const item: ContentsItem = { label: heading.text, href: `#${heading.slug}` };
+  if (heading.depth === 2) {
+    contents.push(item);
+    parent = item;
+  } else if (parent) {
+    (parent.children ??= []).push(item);
+  } else {
+    contents.push(item);
+  }
+}
+const hasContents = contents.length > 0;
 ---
 <Base title={post.data.title} description={post.data.excerpt} type="article">
   <Nav />
   <style>
+    :global(.datpm-site-shell:has(.datpm-article-layout--toc)) {
+      width: min(calc(100% - 64px), 1320px);
+    }
     .datpm-article-header {
       padding: clamp(30px, 5vw, 58px) 28px 30px;
       background: var(--paper);
+      text-align: left;
     }
+    .datpm-article-header--toc { padding-left: 266px; }
     .datpm-article-meta {
       font-family: var(--meta);
       font-size: 10px;
@@ -30,7 +53,7 @@ const { Content } = await render(post);
       gap: 16px;
       flex-wrap: wrap;
     }
-    .datpm-article-title { font: 700 clamp(38px, 6vw, 68px)/.98 var(--serif); margin-bottom: 16px; max-width: 860px; text-wrap: balance; }
+    .datpm-article-title { display: block; width: 100%; text-align: left; font: 700 clamp(38px, 6vw, 68px)/.98 var(--serif); margin-bottom: 16px; max-width: 860px; text-wrap: pretty; }
     .datpm-article-excerpt { color: var(--ink); font: 17px/1.65 var(--serif); margin-bottom: 16px; max-width: 760px; }
     .datpm-article-tags { display: flex; gap: 6px; flex-wrap: wrap; }
     .datpm-article-tag {
@@ -48,6 +71,50 @@ const { Content } = await render(post);
       margin-inline: 0 auto;
       background: var(--paper);
     }
+    .datpm-article-layout--toc {
+      display: grid;
+      grid-template-columns: 238px minmax(0, 900px);
+      gap: 28px;
+      align-items: start;
+    }
+    .datpm-article-layout--toc .datpm-article-body {
+      grid-column: 2;
+      width: 100%;
+      max-width: none;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 38px 28px 38px 0;
+    }
+    .datpm-article-toc {
+      grid-column: 1;
+      box-sizing: border-box;
+      position: sticky;
+      top: 22px;
+      min-width: 0;
+      max-height: calc(100vh - 44px);
+      overflow-y: auto;
+      margin-top: 38px;
+      padding: 12px 14px;
+      border-left: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .datpm-article-toc summary {
+      margin-bottom: 10px;
+      color: var(--ink);
+      cursor: pointer;
+      font: 700 17px/1.3 var(--serif);
+    }
+    .datpm-article-toc ul { list-style: none; margin: 0; padding: 0; }
+    .datpm-article-toc li { margin: 0 0 8px; }
+    .datpm-article-toc li ul { margin: 5px 0 9px 10px; padding-left: 10px; border-left: 1px solid #d5dedb; }
+    .datpm-article-toc li ul li { margin-bottom: 6px; }
+    .datpm-article-toc a {
+      color: var(--muted);
+      font: 12px/1.45 var(--meta);
+      text-decoration: none;
+    }
+    .datpm-article-toc a:hover { color: var(--accent); text-decoration: underline; }
+    .datpm-article-toc a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     /* h2 = article section, h3 = challenge, h4 = challenge-specific reasoning */
     .datpm-article-body :global(h2) {
       color: var(--ink);
@@ -76,6 +143,42 @@ const { Content } = await render(post);
     .datpm-article-body :global(p) { font-family: var(--serif); font-size: 18px; line-height: 1.82; margin-bottom: 1.1em; color: var(--ink); overflow-wrap:anywhere; }
     .datpm-article-body :global(ul), .datpm-article-body :global(ol) { font-size: 16px; line-height: 1.85; padding-left: 1.5em; margin-bottom: 1.2em; }
     .datpm-article-body :global(li) { margin-bottom: 0.35em; }
+    .datpm-article-body :global(code) {
+      color: var(--ink);
+      background: #eef2f0;
+      border: 1px solid #d5dedb;
+      border-radius: 2px;
+      padding: .08em .28em;
+      font: .88em var(--code);
+      overflow-wrap: anywhere;
+    }
+    .datpm-article-body :global(pre code) {
+      color: inherit;
+      background: none;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      overflow-wrap: normal;
+    }
+    @media (max-width: 980px) {
+      :global(.datpm-site-shell:has(.datpm-article-layout--toc)) {
+        width: min(calc(100% - 48px), 920px);
+      }
+      .datpm-article-layout--toc { display: flex; flex-direction: column; }
+      .datpm-article-layout--toc .datpm-article-toc {
+        order: 0;
+        position: static;
+        width: calc(100% - 56px);
+        max-height: none;
+        margin: 12px 28px 0;
+      }
+      .datpm-article-layout--toc .datpm-article-body {
+        order: 1;
+        width: 100%;
+        padding: 26px 28px;
+      }
+      .datpm-article-header--toc { padding-left: 28px; }
+    }
     .datpm-article-body :global(a) { color: var(--accent); }
     .datpm-article-body :global(a:hover) { background: var(--ink); color: var(--paper); }
     .datpm-article-body :global(img) { display:block; width:100%; max-width:100%; height:auto; margin:1.5rem 0 0.55rem; border:1px solid var(--line); }
@@ -100,7 +203,25 @@ const { Content } = await render(post);
       padding: 8px 10px;
     }
     @media (max-width: 640px) {
+      :global(.datpm-site-shell:has(.datpm-article-layout--toc)) {
+        width: min(calc(100% - 28px), 980px);
+      }
+      .datpm-article-layout--toc { display: flex; flex-direction: column; }
+      .datpm-article-layout--toc .datpm-article-toc { order: 0; }
+      .datpm-article-layout--toc .datpm-article-toc { width: auto; margin: 12px 14px 0; }
+      .datpm-article-layout--toc .datpm-article-body { order: 1; }
+      .datpm-article-toc {
+        position: static;
+        max-height: none;
+        margin: 12px 14px 0;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+      }
+      .datpm-article-toc summary { margin: 0; font-size: 15px; }
+      .datpm-article-toc details[open] summary { margin-bottom: 9px; }
+      .datpm-article-layout--toc .datpm-article-body { padding: 22px 14px; }
       .datpm-article-header { padding: 28px 14px 20px; }
+      .datpm-article-header--toc { padding-left: 14px; }
       .datpm-article-title { font-size: clamp(32px, 11vw, 48px); }
       .datpm-article-excerpt {
         font-size: 14px;
@@ -115,6 +236,7 @@ const { Content } = await render(post);
     }
     @media (max-width: 420px) {
       .datpm-article-header { padding: 22px 10px 16px; }
+      .datpm-article-header--toc { padding-left: 10px; }
       .datpm-article-title { font-size: 30px; }
       .datpm-article-meta {
         gap: 8px;
@@ -131,7 +253,7 @@ const { Content } = await render(post);
     }
   </style>
 
-  <div class="datpm-article-header">
+  <div class:list={['datpm-article-header', hasContents && 'datpm-article-header--toc']}>
     <div class="datpm-article-meta">
       <span>{post.data.date.toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'})}</span>
       <span>{post.data.category}</span>
@@ -143,8 +265,21 @@ const { Content } = await render(post);
     </div>
   </div>
 
-  <div class="datpm-article-body">
-    <Content />
+  <div class:list={['datpm-article-layout', hasContents && 'datpm-article-layout--toc']}>
+    {hasContents && <aside class="datpm-article-toc" aria-label="Contents">
+      <details open data-responsive-toc>
+        <summary>Contents</summary>
+        <nav aria-label="Article contents">
+          <ul>{contents.map((item) => <li>
+            <a href={item.href}>{item.label}</a>
+            {item.children && <ul>{item.children.map((child) => <li><a href={child.href}>{child.label}</a></li>)}</ul>}
+          </li>)}</ul>
+        </nav>
+      </details>
+    </aside>}
+    <article class="datpm-article-body">
+      <Content />
+    </article>
   </div>
 
   <div class="datpm-article-nav">
@@ -153,4 +288,11 @@ const { Content } = await render(post);
   </div>
 
   <Footer />
+  {hasContents && <script>
+    const toc = document.querySelector<HTMLDetailsElement>('[data-responsive-toc]');
+    const mobile = window.matchMedia('(max-width: 640px)');
+    const syncContents = () => { if (toc) toc.open = !mobile.matches; };
+    syncContents();
+    mobile.addEventListener('change', syncContents);
+  </script>}
 </Base>

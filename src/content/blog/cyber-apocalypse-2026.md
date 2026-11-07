@@ -9,18 +9,6 @@ excerpt: "Four Cyber Apocalypse 2026 solves, with the reasoning, commands, and f
 
 Cyber Apocalypse CTF 2026 ran from 24 to 29 July 2026. I played it with the RMIT Cybersecurity Hub team. This page covers four solves; the other folders stop before a flag and stay in my archive for now.
 
-## Contents
-
-- [A week of solving](#a-week-of-solving)
-- [Cryptography](#cryptography)
-  - [The Ashen Field](#ca-crypto-01-the-ashen-field--turning-boolean-polynomials-into-a-linear-system)
-  - [Hidden Secret](#ca-crypto-02-hidden-secret--recovering-the-secret-from-seven-samples)
-- [Machine Learning](#machine-learning)
-  - [Assay](#ca-ml-01-assay--extracting-a-model-and-forging-its-seal)
-- [Reverse Engineering](#reverse-engineering)
-  - [CorpSyncAudit](#ca-re-01-corpsyncaudit--decoding-a-pe-log-with-the-binarys-hash-table)
-- [Unfinished challenges](#unfinished-challenges)
-
 ## A week of solving
 
 I joined the RMIT Cybersecurity Hub team because it looked fun. The event certificate records 126/136 solved challenges, 62,775 points, and a team rank of 156 out of 6,744.
@@ -32,7 +20,7 @@ I joined the RMIT Cybersecurity Hub team because it looked fun. The event certif
 
 ## Cryptography
 
-### [CA-CRYPTO-01] The Ashen Field — turning Boolean polynomials into a linear system
+### The Ashen Field — turning Boolean polynomials into a linear system
 
 **Category:** Crypto  
 **Result:** I reproduced the solve from the local `output.txt`  
@@ -92,7 +80,7 @@ The run recorded in the local archive produced:
 
 This is a locally reproduced result. The AES is the last step; the real work is reducing the public-key equations until only four candidate keys remain.
 
-### [CA-CRYPTO-02] Hidden Secret — recovering the secret from seven samples
+### Hidden Secret — recovering the secret from seven samples
 
 **Category:** Crypto  
 **Result:** the solver's recovered flag file is present in the challenge folder  
@@ -148,7 +136,7 @@ The solver writes `recovered_flag.txt` and `recovered_x.txt`. Both files are in 
 
 ## Machine Learning
 
-### [CA-ML-01] Assay — extracting a model and forging its seal
+### Assay — extracting a model and forging its seal
 
 **Category:** Machine Learning  
 **Result:** the recorded remote trials passed and returned a flag  
@@ -210,7 +198,7 @@ The script is a way to repeat the work if the service is brought back. The resul
 
 ## Reverse Engineering
 
-### [CA-RE-01] CorpSyncAudit — decoding a PE log with the binary's hash table
+### CorpSyncAudit — decoding a PE log with the binary's hash table
 
 **Category:** Reverse Engineering  
 **Result:** reproduced locally without executing the PE or decoded stage  

@@ -16,15 +16,6 @@ The trick is to make those two services disagree twice:
 
 The challenge is archived in the official [L3akCTF 2026 challenge repository](https://github.com/sajjadium/ctf-archives/tree/main/ctfs/L3akCTF/2026/web/Zebda). I used its Docker bundle to check the parser differential locally; the local `flag.txt` is a fixture, not the competition flag.
 
-## Contents
-
-- [The two trust decisions](#the-two-trust-decisions)
-- [Bypassing the reserved project name](#bypassing-the-reserved-project-name)
-- [Making the YAML parsers disagree](#making-the-yaml-parsers-disagree)
-- [Executing the privileged import](#executing-the-privileged-import)
-- [Solver / reproduction](#solver--reproduction)
-- [Result](#result)
-
 ## The two trust decisions
 
 The middleware checks the project slug and the manifest action. The worker later canonicalizes the slug, selects a policy, parses the same manifest again, and executes it.

@@ -5,19 +5,12 @@ date: 2026-10-07
 category: "CTF · Forensics, Reverse Engineering, Pwn"
 tags: ["qa", "forensics", "steganography", "reverse-engineering", "kernel", "xor"]
 excerpt: "Notes from a QA challenge set: an appended ZIP in an MP4, a custom disk image, an XOR-obfuscated checker, and two KSMBD packages with misleading decoys."
+tocDepth: 2
 ---
 
 These five notes came from the same `chall.rar`-style bundle. I do not have the competition name, so I am leaving it out instead of guessing.
 
 The bundle also contains a `Dgial trial` note. I left it out because its repair script and memory dump disagree; I would rather leave that one unresolved than guess at the flag.
-
-## Contents
-
-- [Hexagonal Veil](#hexagonal-veil--an-mp4-that-ends-with-a-zip)
-- [INFERNO](#inferno--carving-a-custom-filesystem-record)
-- [KSMBD HELL](#ksmbd-hell--the-package-reveals-the-success-file)
-- [KsmbDead](#ksmbdead--the-same-kernel-bundle-with-a-different-name)
-- [Vietnamese Identity](#vietnamese-identity--a-short-xor-obfuscated-checker)
 
 ## Hexagonal Veil — an MP4 that ends with a ZIP
 

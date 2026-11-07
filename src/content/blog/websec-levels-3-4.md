@@ -9,11 +9,6 @@ excerpt: "Two WebSec solves: a raw-hash and bcrypt truncation bug, then PHP obje
 
 These are two levels from the same WebSec series. They fit together nicely: the first is a hash-format mistake, and the second turns a cookie into SQL execution.
 
-## Contents
-
-- [Level 3 — ChaChaCha](#level-3--chachacha--raw-sha1-bytes-inside-bcrypt)
-- [Level 4 — Serialization Is a Pain](#level-4--serialization-is-a-pain--a-cookie-becomes-sql)
-
 ## Level 3 — ChaChaCha — raw SHA-1 bytes inside bcrypt
 
 **Category:** Web  

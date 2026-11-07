@@ -20,15 +20,6 @@ run([OldPath, NewPath]) ->
 
 The worker begins in the old version, but the module is upgraded while it is still alive. The recorded solve recovered the passphrase and submitted it to the remote service.
 
-## Contents
-
-- [What hot code loading changes](#what-hot-code-loading-changes)
-- [The validator is split across two versions](#the-validator-is-split-across-two-versions)
-- [Recovering the first half](#recovering-the-first-half)
-- [Recovering the second half](#recovering-the-second-half)
-- [Solver / reproduction](#solver--reproduction)
-- [Result](#result)
-
 ## What hot code loading changes
 
 Erlang can keep two versions of a module resident at once. A process that is already running old code can keep using the old version for local calls, while a fully qualified call can enter the currently loaded version.

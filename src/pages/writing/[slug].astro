@@ -65,13 +65,13 @@ const { Content } = await render(post);
       text-wrap: balance;
     }
     .datpm-article-body :global(h4) {
-      font-family: var(--meta);
-      font-size: 15px;
+      font-family: var(--serif);
+      font-size: clamp(19px, 2.4vw, 22px);
       font-weight: 700;
-      color: var(--accent);
+      color: var(--ink);
       margin: 1.8em 0 0.65em;
-      padding: 6px 0;
-      line-height: 1.35;
+      padding: 0;
+      line-height: 1.2;
     }
     .datpm-article-body :global(p) { font-family: var(--serif); font-size: 18px; line-height: 1.82; margin-bottom: 1.1em; color: var(--ink); overflow-wrap:anywhere; }
     .datpm-article-body :global(ul), .datpm-article-body :global(ol) { font-size: 16px; line-height: 1.85; padding-left: 1.5em; margin-bottom: 1.2em; }
@@ -123,7 +123,7 @@ const { Content } = await render(post);
       .datpm-article-body { padding: 22px 10px; }
       .datpm-article-body :global(h2) { font-size: 26px; }
       .datpm-article-body :global(h3) { font-size: 23px; }
-      .datpm-article-body :global(h4) { font-size: 13px; }
+      .datpm-article-body :global(h4) { font-size: 19px; }
       .datpm-article-nav {
         flex-direction: column;
         padding: 14px 10px;

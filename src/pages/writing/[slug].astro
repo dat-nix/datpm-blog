@@ -53,7 +53,7 @@ const hasContents = contents.length > 0;
       gap: 16px;
       flex-wrap: wrap;
     }
-    .datpm-article-title { display: block; width: 100%; text-align: left; font: 700 clamp(38px, 6vw, 68px)/.98 var(--serif); margin-bottom: 16px; max-width: 860px; text-wrap: pretty; }
+    .datpm-article-title { display: block; width: 100%; text-align: left; font: 700 clamp(38px, 6vw, 68px)/.98 var(--serif); margin-bottom: 16px; max-width: 860px; text-wrap: balance; }
     .datpm-article-excerpt { color: var(--ink); font: 17px/1.65 var(--serif); margin-bottom: 16px; max-width: 760px; }
     .datpm-article-tags { display: flex; gap: 6px; flex-wrap: wrap; }
     .datpm-article-tag {
@@ -164,20 +164,12 @@ const hasContents = contents.length > 0;
       :global(.datpm-site-shell:has(.datpm-article-layout--toc)) {
         width: min(calc(100% - 48px), 920px);
       }
-      .datpm-article-layout--toc { display: flex; flex-direction: column; }
-      .datpm-article-layout--toc .datpm-article-toc {
-        order: 0;
-        position: static;
-        width: calc(100% - 56px);
-        max-height: none;
-        margin: 12px 28px 0;
-      }
+      .datpm-article-layout--toc { grid-template-columns: 210px minmax(0, 1fr); gap: 18px; }
       .datpm-article-layout--toc .datpm-article-body {
-        order: 1;
-        width: 100%;
-        padding: 26px 28px;
+        padding: 26px 14px 26px 0;
       }
-      .datpm-article-header--toc { padding-left: 28px; }
+      .datpm-article-toc { padding-inline: 10px; }
+      .datpm-article-header--toc { padding-left: 228px; }
     }
     .datpm-article-body :global(a) { color: var(--accent); }
     .datpm-article-body :global(a:hover) { background: var(--ink); color: var(--paper); }
@@ -206,10 +198,8 @@ const hasContents = contents.length > 0;
       :global(.datpm-site-shell:has(.datpm-article-layout--toc)) {
         width: min(calc(100% - 28px), 980px);
       }
-      .datpm-article-layout--toc { display: flex; flex-direction: column; }
-      .datpm-article-layout--toc .datpm-article-toc { order: 0; }
+      .datpm-article-layout--toc { display: block; }
       .datpm-article-layout--toc .datpm-article-toc { width: auto; margin: 12px 14px 0; }
-      .datpm-article-layout--toc .datpm-article-body { order: 1; }
       .datpm-article-toc {
         position: static;
         max-height: none;

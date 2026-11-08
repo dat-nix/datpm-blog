@@ -11,7 +11,7 @@ I solved three TAMU CTF 2026 challenges: Broken Website, Choppy, and numbers. Th
 
 ## Web
 
-### Broken Website — when the web server only speaks HTTP/3
+### Broken Website
 
 **Category:** Web · **Points:** 110  
 **Result:** solved against the public challenge endpoint  
@@ -72,7 +72,7 @@ The final request returned an HTTP/3 200 response from Caddy with the flag in th
 
 ## Audio Forensics
 
-### Choppy — sorting audio by its sweep tone
+### Choppy
 
 **Category:** Audio Forensics  
 **Result:** reconstructed audio and decoded the spoken flag  
@@ -137,7 +137,7 @@ A normal band-pass filter cannot cleanly remove the sweep because it overlaps th
 
 ## Signal Processing
 
-### numbers — rebuilding audio from an STFT dump
+### numbers
 
 **Category:** Misc / Signal Processing  
 **Result:** reconstructed the audio and recovered the lowercase flag  

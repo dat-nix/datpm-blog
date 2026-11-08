@@ -1,5 +1,5 @@
 ---
-title: "Zebda — when two YAML parsers disagree about a privileged job"
+title: "Zebda"
 ctf: "L3akCTF 2026"
 date: 2026-08-01
 category: "CTF · Web Security"

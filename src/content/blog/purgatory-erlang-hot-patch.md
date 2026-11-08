@@ -1,5 +1,5 @@
 ---
-title: "Purgatory — solving an Erlang validator across a hot code upgrade"
+title: "Purgatory"
 ctf: "Unidentified CTF"
 date: 2026-09-06
 category: "CTF · Reverse Engineering"

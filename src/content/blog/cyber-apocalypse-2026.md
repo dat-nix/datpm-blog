@@ -20,7 +20,7 @@ I joined the RMIT Cybersecurity Hub team because it looked fun. The event certif
 
 ## Cryptography
 
-### The Ashen Field — turning Boolean polynomials into a linear system
+### The Ashen Field
 
 **Category:** Crypto  
 **Result:** I reproduced the solve from the local `output.txt`  
@@ -80,7 +80,7 @@ The run recorded in the local archive produced:
 
 This is a locally reproduced result. The AES is the last step; the real work is reducing the public-key equations until only four candidate keys remain.
 
-### Hidden Secret — recovering the secret from seven samples
+### Hidden Secret
 
 **Category:** Crypto  
 **Result:** the solver's recovered flag file is present in the challenge folder  
@@ -136,7 +136,7 @@ The solver writes `recovered_flag.txt` and `recovered_x.txt`. Both files are in 
 
 ## Machine Learning
 
-### Assay — extracting a model and forging its seal
+### Assay
 
 **Category:** Machine Learning  
 **Result:** the recorded remote trials passed and returned a flag  
@@ -198,7 +198,7 @@ The script is a way to repeat the work if the service is brought back. The resul
 
 ## Reverse Engineering
 
-### CorpSyncAudit — decoding a PE log with the binary's hash table
+### CorpSyncAudit
 
 **Category:** Reverse Engineering  
 **Result:** reproduced locally without executing the PE or decoded stage  

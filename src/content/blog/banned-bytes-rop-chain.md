@@ -13,7 +13,7 @@ The handout contains a local fixture, so the local run prints `TBCTF{dummy}`. Th
 
 ## Pwn
 
-### Banned Bytes — a ROP chain around filtered characters
+### Banned Bytes
 
 #### What the handout gives us
 
@@ -206,7 +206,7 @@ The real fix is much less clever: bound the read to the size of the destination 
 
 ## Web
 
-### Ping Me — a 15-byte command injection
+### Ping Me
 
 This challenge looks like a tiny network utility with a very opinionated input box: fifteen characters, no letters, digits and dots only. The page even flashes a warning when a letter is typed. That made the first step easy to guess: the interesting part was not the frontend, but the small Flask endpoint behind it.
 

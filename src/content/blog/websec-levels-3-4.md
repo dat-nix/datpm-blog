@@ -9,7 +9,7 @@ excerpt: "Two WebSec solves: a raw-hash and bcrypt truncation bug, then PHP obje
 
 These are two levels from the same WebSec series. They fit together nicely: the first is a hash-format mistake, and the second turns a cookie into SQL execution.
 
-## Level 3 — ChaChaCha — raw SHA-1 bytes inside bcrypt
+## Level 3 — ChaChaCha
 
 **Category:** Web  
 **Result:** recorded successful input and flag  
@@ -98,7 +98,7 @@ Submitting `CWM` makes `sha1("CWM", true)` begin with the same `7c 00` prefix as
 
 Hash output format is part of the security boundary. A hex digest and a raw digest have different lengths, different bytes, and different behavior when passed to another API. Hashing twice does not automatically make a protocol safer; it can create a new parser or truncation boundary between the two functions.
 
-## Level 4 — Serialization Is a Pain — a cookie becomes SQL
+## Level 4 — Serialization Is a Pain
 
 **Category:** Web  
 **Result:** recorded database enumeration and flag extraction  

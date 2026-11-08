@@ -8,9 +8,9 @@ excerpt: "Fourteen challenge sections from the RMIT_RCE preliminary-round submis
 tocDepth: 2
 ---
 
-These are edited English notes from RMIT_RCE’s 25 April 2026 submission. The [original PDF](/artifacts/hacktheon-sejong-2026-rmit-rce-submission.pdf) has the submitted screenshots and full solver code where it was included.
+These are edited English notes from RMIT_RCE’s 25 April 2026 submission. Solver files are linked in the relevant sections.
 
-## simple-sqli — the single quote
+## simple-sqli
 
 **Category:** Web  
 **Result:** hacktheon2026{d0nt_f0rget_the_s1ng1e_qu0te}
@@ -59,7 +59,7 @@ That keeps the quote inside the value instead of allowing it to become SQL synta
 
 ![The vulnerable login handler shown in the submitted evidence.](/images/hacktheon-sejong/simple-sqli-source.png)
 
-## PhantomPass Revenge — a cross-origin WebAuthn pivot
+## PhantomPass Revenge
 
 **Category:** Web / WebAuthn  
 **Result:** hacktheon2026{r3v3ng3_ph4nt0m_4dm1n_b00tstr4p_l0ck3d}
@@ -87,7 +87,7 @@ The challenge also leaks the `allowCredentials` search space. Each failed candid
 
 ![The submitted evidence showing the recovered admin credential flow.](/images/hacktheon-sejong/phantompass-flag.png)
 
-## PhantomPass — racing the admin registration
+## PhantomPass
 
 **Category:** Web / WebAuthn  
 **Result:** hacktheon2026{ph4nt0m_r0r_x_n0nc3_gh0st_ch41n}
@@ -123,7 +123,7 @@ The stored-XSS-looking code in the dashboard was a dead end; CSP killed the prac
 
 The hourly reset is not itself the vulnerability. It simply creates a predictable interval in which the legitimate bot has not finished its own registration. Once the attacker wins that interval, the pending challenge can be completed with an attacker-controlled authenticator, permanently binding the attacker's credential to the already-authenticated admin session.
 
-## Dark Harbor 1 — seeding an HS256 policy key
+## Dark Harbor 1
 
 **Category:** Web / distributed systems  
 **Result:** hacktheon2026{sil3nt_tid3_bre4ch}
@@ -190,7 +190,7 @@ The same absolute-form request-target bypass reaches /internal/admin-console.jso
 
 This is a three-boundary chain: the public edge interprets the request target, the API interprets the bearer token, and the policy engine interprets the seeded verifier entry. Breaking any one link stops the exploit. That is why I did not call the JWT bug alone “admin access”; it only creates the first credential needed to reach the internal seed route.
 
-## Old Days — tcache poisoning into TLS
+## Old Days
 
 **Category:** Pwn  
 **Result:** hacktheon2026{old-d4y5_glibc_expl0it4ti0n}
@@ -223,7 +223,7 @@ After poisoning the tcache list, the next allocation overlaps the main-thread `s
 
 This is a good example of a mitigation changing the target rather than ending the exploit. Full RELRO, PIE, SHSTK, and the custom forbidden range remove the obvious destinations. The stale pointer still gives read/write; the solve succeeds by finding a writable control structure outside the range the challenge author blocked.
 
-## Even Made — a crash oracle with even shellcode
+## Even Made
 
 **Category:** Pwn / shellcode  
 **Result:** hacktheon2026{Ev3n_R3str1ct3d_Sh3llc0d3_M4sT3r}
@@ -245,7 +245,7 @@ carry = 0 -> SIGSEGV
 
 The parent process sees the signal from the child and converts it back into a bit. Eight probes reconstruct one byte, and the loop stops at `}`. It is slow, but it needs no allowed output syscall at all; the operating system's fault classification is the output channel.
 
-## Brain Outside — reconstructing a file with shellcode oracles
+## Brain Outside
 
 **Category:** Reverse Engineering  
 **Result:** hacktheon2026{90364e95eddf0fc1d5f54662d8e80913}
@@ -287,7 +287,7 @@ The randomized ordering explains why one clean run was not enough. The service w
 
 ![The recovered PNG showing the Brain Outside result.](/images/hacktheon-sejong/brain-outside-recovered-flag.png)
 
-## CathedralOfTheLastCandle — solving a rooted tree over F3
+## CathedralOfTheLastCandle
 
 **Category:** Misc / interactive math  
 **Result:** hacktheon2026{35e9acaa476ef8747fc4cb72fa3f24c5242cc541ed96b8e0ac34c303af257621efcbe26110bb7b051540d840813a26d49c9ad69d2ad17a2709ef56e8c7aed44a1a003bcf5b383b3d}
@@ -324,9 +324,9 @@ The 153-command mapping cost is not just movement. It includes the reversible pr
 
 ### Solver / reproduction
 
-The submitted PDF includes the complete `solve.py`, with the board parser, reversible bond probe, tree DP, command reconstruction, and simulator. [Open the submission PDF](/artifacts/hacktheon-sejong-2026-rmit-rce-submission.pdf).
+The solver maps the board, probes its hidden bonds, then builds and simulates the command sequence. [Download `cathedral_solve.py`](/solvers/hacktheon-sejong-2026/cathedral_solve.py).
 
-## Immutable — overwriting the checked value without touching the canary
+## Immutable
 
 **Category:** Pwn  
 **Local result:** hacktheon2026{fake_flag} — the placeholder stored in the local challenge bundle, not a claimed remote flag
@@ -387,9 +387,9 @@ Give me a input: You win!
 hacktheon2026{fake_flag}
 ~~~
 
-The PDF also includes a socket-based version. The local flag above is the bundle’s placeholder.
+The [socket solver](/solvers/hacktheon-sejong-2026/immutable_solve.py) sends the same payload to a running instance.
 
-## Plottergeist — when a microphone reveals the pen
+## Plottergeist
 
 **Category:** Forensics / side-channel analysis  
 **Result:** hacktheon2026{the_plotter_reveals_its_secret_through_sound}
@@ -412,9 +412,9 @@ That comparison matters because the microphone has its own gain and background n
 
 ### Solver / reproduction
 
-The complete `solve_plottergeist.py` is included in the [submission PDF](/artifacts/hacktheon-sejong-2026-rmit-rce-submission.pdf). It parses the pcap and WAV, then rebuilds candidate images from packet timing and audio features.
+[Download `plottergeist_solve.py`](/solvers/hacktheon-sejong-2026/plottergeist_solve.py). It takes the pcap and WAV as inputs and writes candidate images to an output directory.
 
-## Voice Over — a two-data-chunk WAV
+## Voice Over
 
 **Category:** AI / audio processing  
 **Result:** hacktheon2026{b7d30e21e4106a6ca4d451a218f15a97}
@@ -438,9 +438,9 @@ The WAV header advertises one format chunk, but RIFF permits more than one `data
 
 ### Solver / reproduction
 
-The full `solve.py` is included in the [submission PDF](/artifacts/hacktheon-sejong-2026-rmit-rce-submission.pdf). It fetches a challenge, synthesizes the target sentence, builds the two-data-chunk WAV, and submits it.
+[Download `voice_over_solve.py`](/solvers/hacktheon-sejong-2026/voice_over_solve.py). It defaults to a local service at `127.0.0.1:8000`; pass another base URL with `--base-url` if needed.
 
-## Dark Harbor 2 — cross-tenant secrets
+## Dark Harbor 2
 
 **Category:** Web / cryptography  
 **Result:** hacktheon2026{lighth0use_se4l_cr4ck}
@@ -471,9 +471,9 @@ The hard part is obtaining both inputs from the right workspace. A role check an
 
 ### Solver / reproduction
 
-The complete `solve.py` is included in the [submission PDF](/artifacts/hacktheon-sejong-2026-rmit-rce-submission.pdf). It follows the cross-tenant path and decrypts the recovered secret.
+[Download `dark_harbor2_solve.py`](/solvers/hacktheon-sejong-2026/dark_harbor2_solve.py). It uses the local challenge URL by default and reads `HMAC_SECRET` from `.env` or the environment.
 
-## Until Executing — an OCaml state machine
+## Until Executing
 
 **Category:** Reverse Engineering  
 **Result:** hacktheon2026{ovajumher0erwk128_i8eecp1hb5enitsj61y5hx05qel7a2z1gb6y8vi4fd4193}
@@ -486,12 +486,12 @@ That makes the solve a left-to-right depth-first search over at most 38 characte
 
 OCaml integers are tagged in the native runtime, so constants seen in the disassembly are not always their mathematical values. Recovering the verifier meant separating the tag/un-tag operations from the actual table lookup and state transition. Once that was done, each candidate character could be rejected immediately by the two table equations instead of waiting for the final 64-byte check.
 
-## Recover it! — a 64-byte XOR check
+## Recover it!
 
 **Category:** Reverse Engineering  
-**Result as written in the PDF:** hackeon2026{22c34e819d2800db605d9fdbc9ba9ab71d6b9175d6b3b016c49cd94624f545c3}
+**Recovered body:** `22c34e819d2800db605d9fdbc9ba9ab71d6b9175d6b3b016c49cd94624f545c3`
 
-The final line in the PDF prints `hackeon2026` without the `th`. It looks like a typo—the competition prefix elsewhere is `hacktheon2026`—but I left the recorded spelling unchanged.
+The solver recovers the 64-character body by reversing the XOR byte by byte.
 
 The binary requires exactly 64 input bytes and transforms each byte in place:
 
@@ -517,4 +517,4 @@ This is a good small reversing habit: trace the call graph before spending time 
 
 ### Solver / reproduction
 
-The [submission PDF](/artifacts/hacktheon-sejong-2026-rmit-rce-submission.pdf) includes the complete Python script and all 64 table bytes.
+[Download `recover_it_solve.py`](/solvers/hacktheon-sejong-2026/recover_it_solve.py).

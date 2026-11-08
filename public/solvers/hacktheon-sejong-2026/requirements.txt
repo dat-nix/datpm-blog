@@ -1,0 +1,6 @@
+cryptography
+edge-tts
+imageio-ffmpeg
+numpy
+Pillow
+soundfile
